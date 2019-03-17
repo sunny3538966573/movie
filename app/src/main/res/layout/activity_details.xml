@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.DetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/location_details"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="24dp"
+            android:src="@drawable/cinema_detail_icon_location_default_hdpi" />
+
+        <TextView
+            android:id="@+id/textview_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/location_details"
+            android:text="北京"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/search_rl"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/shape_search_bg">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:paddingLeft="8dp"
+                android:src="@drawable/com_icon_search_default_hdpi" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+<RadioGroup
+    android:id="@+id/rg"
+    android:layout_width="312dp"
+    android:layout_height="25dp"
+    android:layout_marginTop="16dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal">
+<RadioButton
+    android:id="@+id/rb_01"
+    android:layout_width="83dp"
+    android:layout_height="25dp"
+    android:button="@null"
+    android:text="热门电影"
+    android:gravity="center"
+    android:checked="true"
+    android:textSize="14sp"
+    android:textColor="#ffffff"
+    android:background="@drawable/radio_selector"
+    android:elevation="4dp"/>
+    <RadioButton
+        android:id="@+id/rb_02"
+        android:layout_width="83dp"
+        android:layout_height="25dp"
+        android:button="@null"
+        android:text="正在热映"
+        android:layout_marginLeft="31.5dp"
+        android:layout_marginRight="31.5dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:background="@drawable/radio_selector"
+        android:elevation="4dp"/>
+    <RadioButton
+        android:id="@+id/rb_03"
+        android:layout_width="83dp"
+        android:layout_height="25dp"
+        android:button="@null"
+        android:text="即将上映"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:background="@drawable/radio_selector"
+        android:elevation="4dp"/>
+</RadioGroup>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="48dp">
+
+        </android.support.v4.view.ViewPager>
+        <ImageView
+            android:id="@+id/back_details"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/com_icon_my_default_hdpi"
+            android:layout_marginTop="450dp"
+            android:layout_marginLeft="24dp"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
