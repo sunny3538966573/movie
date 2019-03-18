@@ -52,11 +52,13 @@ dependencies {
     implementation files('libs/ormlite-android-5.1.jar')
 
 }
-configurations.all {     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-    def requested = details.requested
-    if (requested.group == 'com.android.support') {
-        if (!requested.name.startsWith("multidex")) {
-            details.useVersion '28.0.0'    //此处填写你项目使用的sdk版本
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'    //此处填写你项目使用的sdk版本
+            }
         }
     }
-} }
+}

@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 
 public class GuideActivity extends WDActivity implements View.OnClickListener {
 
-
     @BindView(R.id.vp_guide)
     ViewPager vp;
     @BindView(R.id.btn_enter)

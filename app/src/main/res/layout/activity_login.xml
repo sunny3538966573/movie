@@ -37,7 +37,10 @@
                 android:singleLine="true"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:lines="1"
+                android:maxLength="11"
+                android:inputType="number"/>
         </LinearLayout>
 
         <View
@@ -73,11 +76,13 @@
                 android:singleLine="true"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:inputType="numberPassword"/>
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="18dp"
+                android:id="@+id/eye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/log_icon_eye_default_hdpi" />
         </LinearLayout>

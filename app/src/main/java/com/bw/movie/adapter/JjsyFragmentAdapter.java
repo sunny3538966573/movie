@@ -29,14 +29,16 @@ public class JjsyFragmentAdapter extends RecyclerView.Adapter<JjsyFragmentAdapte
 
     public JjsyFragmentAdapter(Context context) {
         this.context = context;
-        list=new ArrayList<>();
+        list = new ArrayList<>();
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
+
     public void addAll(List<JjsyBean> result) {
-        if(result!=null){
+        if (result != null) {
             list.addAll(result);
         }
     }
@@ -50,25 +52,47 @@ public class JjsyFragmentAdapter extends RecyclerView.Adapter<JjsyFragmentAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         viewHolder.rmdy_xrecy_img.setImageURI(Uri.parse(list.get(i).getImageUrl()));
         viewHolder.rmdy_xrecy_name.setText(list.get(i).getName());
         viewHolder.rmdy_xrecy_content.setText(list.get(i).getSummary());
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = list.get(i).getId();
+                if (monitemClickListener!=null){
+                    monitemClickListener.onItemClick(id);
+                }
+
+            }
+        });
     }
 
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final SimpleDraweeView rmdy_xrecy_img;
-        private final TextView rmdy_xrecy_name,rmdy_xrecy_content;
+        private final TextView rmdy_xrecy_name, rmdy_xrecy_content;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rmdy_xrecy_img = itemView.findViewById(R.id.jjsy_xrecy_img);
             rmdy_xrecy_name = itemView.findViewById(R.id.jjsy_xrecy_name);
-            rmdy_xrecy_content=  itemView.findViewById(R.id.jjsy_xrecy_content);
+            rmdy_xrecy_content = itemView.findViewById(R.id.jjsy_xrecy_content);
 
         }
+    }
+
+    /**
+     * 接口回调
+     */
+    public interface OnitemClickListener {
+        void onItemClick(int position);
+    }
+
+    public OnitemClickListener monitemClickListener;
+
+    public void setonitemClickListener(OnitemClickListener onitemClickListener) {
+        monitemClickListener = onitemClickListener;
     }
 }

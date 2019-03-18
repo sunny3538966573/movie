@@ -32,7 +32,8 @@
         <activity android:name=".activity.RegistActivity" />
         <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.DetailsActivity"></activity>
+        <activity android:name=".activity.DetailsActivity" />
+        <activity android:name=".activity.FilmDetailsActivity"></activity>
     </application>
 
 </manifest>

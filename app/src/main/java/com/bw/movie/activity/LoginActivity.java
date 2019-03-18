@@ -2,10 +2,10 @@ package com.bw.movie.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +18,7 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.presenter.LoginPresenter;
 import com.bw.movie.sqlite.DbManager;
 import com.bw.movie.utils.EncryptUtil;
+import com.bw.movie.utils.PhoneNumber;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
@@ -36,6 +37,8 @@ public class LoginActivity extends WDActivity {
     Button btnLogin;
     @BindView(R.id.go_regist)
     TextView goRegist;
+    @BindView(R.id.eye)
+    ImageView eye;
     private LoginPresenter loginPresenter;
 
     @Override
@@ -49,16 +52,23 @@ public class LoginActivity extends WDActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 String phone = loginPhone.getText().toString().trim();
+                String phone = loginPhone.getText().toString().trim();
                 String pwd = loginPwd.getText().toString().trim();
-                 String encrypt = EncryptUtil.encrypt(pwd);
-                 if (TextUtils.isEmpty(phone)||TextUtils.isEmpty(pwd)){
-                     Toast.makeText(LoginActivity.this, "手机号或者密码不可以为空", Toast.LENGTH_SHORT).show();
-                 }else {
-                     loginPresenter = new LoginPresenter(new LoginCall());
-                     loginPresenter.reqeust(phone,encrypt);
-                    //跳转到主页面
-                     intent(HomeActivity.class);
+                String encrypt = EncryptUtil.encrypt(pwd);
+                //进行正则验证
+                boolean mobileNO = PhoneNumber.isMobileNO(phone);
+                if (TextUtils.isEmpty(phone) || TextUtils.isEmpty(pwd)) {
+                    Toast.makeText(LoginActivity.this, "手机号或者密码不可以为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (mobileNO) {
+                        loginPresenter = new LoginPresenter(new LoginCall());
+                        loginPresenter.reqeust(phone, encrypt);
+                        //跳转到主页面
+                        intent(HomeActivity.class);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
@@ -74,10 +84,17 @@ public class LoginActivity extends WDActivity {
         });
     }
 
-    class LoginCall implements DataCall<Result<LoginBean>>{
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    class LoginCall implements DataCall<Result<LoginBean>> {
         @Override
         public void onSuccess(Result<LoginBean> data) {
-            if (data.getStatus().equals("0000")){
+            if (data.getStatus().equals("0000")) {
                 Toast.makeText(LoginActivity.this, data.getMessage(), Toast.LENGTH_SHORT).show();
                 UserInfoBean userInfoBean = data.getResult().getUserInfo();
                 userInfoBean.setStats(100);
@@ -93,7 +110,7 @@ public class LoginActivity extends WDActivity {
                 }
                 finish();
                 overridePendingTransition(R.anim.ac_in, R.anim.ac_out);
-            }else {
+            } else {
                 Toast.makeText(LoginActivity.this, data.getMessage(), Toast.LENGTH_SHORT).show();
             }
 

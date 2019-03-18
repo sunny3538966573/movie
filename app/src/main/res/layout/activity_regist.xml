@@ -34,7 +34,8 @@
             android:hint="昵称"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:lines="1"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -66,6 +67,8 @@
             android:singleLine="true"
             android:background="@null"
             android:hint="性别"
+            android:lines="1"
+            android:maxLength="1"
             android:textColor="#fff"
             android:textColorHint="#fff"
             android:textSize="16sp" />
@@ -138,7 +141,10 @@
             android:hint="手机号"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:lines="1"
+            android:maxLength="11"
+            android:inputType="number"/>
     </LinearLayout>
 
     <View
@@ -208,7 +214,10 @@
             android:hint="登录密码"
             android:textColor="#fff"
             android:textColorHint="#fff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:inputType="numberPassword"
+            android:lines="1"
+            />
     </LinearLayout>
 
     <View

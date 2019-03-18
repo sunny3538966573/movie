@@ -11,6 +11,7 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.presenter.RegistPresenter;
 import com.bw.movie.utils.EncryptUtil;
+import com.bw.movie.utils.PhoneNumber;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,13 +60,19 @@ public class RegistActivity extends WDActivity {
                 }
                 final String sj = registDate.getText().toString().trim();
                 final String phone = registPhone.getText().toString();
+                boolean mobileNO = PhoneNumber.isMobileNO(phone);
                 Log.i(TAG, "initView: "+phone);
                 Log.i(TAG, "initView1: "+sex);
                 final String email = registEmail.getText().toString().trim();
                 String pwd = registPwd.getText().toString().trim();
                 final String encrypt = EncryptUtil.encrypt(pwd);
-                RegistPresenter registPresenter = new RegistPresenter(new RegistCall());
-                registPresenter.reqeust(nikename,phone,encrypt,encrypt,sexNum,sj,"123456","小米","5.0","android",email);
+                if (mobileNO){
+                    RegistPresenter registPresenter = new RegistPresenter(new RegistCall());
+                    registPresenter.reqeust(nikename,phone,encrypt,encrypt,sexNum,sj,"123456","小米","5.0","android",email);
+                }else {
+                    Toast.makeText(RegistActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

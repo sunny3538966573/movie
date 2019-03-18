@@ -1,5 +1,6 @@
 package com.bw.movie.fragment.film;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.FilmDetailsActivity;
 import com.bw.movie.adapter.JjsyFragmentAdapter;
 import com.bw.movie.base.WDFragment;
 import com.bw.movie.bean.JjsyBean;
@@ -59,6 +61,15 @@ public class JjsyFragment extends WDFragment implements XRecyclerView.LoadingLis
         jjsyFragmentPresenter.reqeust(true, userInfo.getUserId(), userInfo.getSessionId());
 
         xrecyJjsy.setLoadingListener(this);
+
+        jjsyFragmentAdapter.setonitemClickListener(new JjsyFragmentAdapter.OnitemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getContext(), FilmDetailsActivity.class);
+                intent.putExtra("id",position);
+                startActivity(intent);
+            }
+        });
     }
 
     class JjsyFragmentCall implements DataCall<Result<List<JjsyBean>>>{
